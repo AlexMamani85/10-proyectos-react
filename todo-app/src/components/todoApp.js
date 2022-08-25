@@ -24,7 +24,7 @@ const TodosContainer = styled.div`
   border-radius: 4px;
   color: black;
   font-weight: bold;
-  width: 50%;
+  width: 90%;
   &:hover {
     color: white;
   }
