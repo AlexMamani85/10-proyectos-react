@@ -3,17 +3,19 @@ import React, { useState } from 'react';
 export default function Todo({item}) {
     const [isEdit,setIsEdit] = useState(false)
 
-    return (
-    <>
-        {isEdit? (
-        <div>Modo editar</div>
-        ):(
+
+    function TodoElement() {
+        return (
             <div>
                 {item.title}
-                <button onClick={()=>setIsEdit('true')}>Editar</button>
+                <button onClick={()=>setIsEdit(true)}>Editar</button>
                 <button>Eliminar</button>
             </div>
-        )}
-    </>
+        );
+    }
+    return (
+    <div>
+        {isEdit? (<FormEdit value={item.title}/>):(<TodoElement />)}
+    </div>
     );
 }
