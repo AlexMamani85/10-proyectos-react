@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
 
 export default function Todo({item}) {
-    return (
-    <div>
-        {item.title}
-        <button>Editar</button>
-        <button>Eliminar</button>
-    </div>);
-}
+    const [isEdit,setIsEdit] = useState(false)
 
- 
+    return (
+    <>
+        {isEdit? (
+        <div>Modo editar</div>
+        ):(
+            <div>
+                {item.title}
+                <button onClick={()=>setIsEdit('true')}>Editar</button>
+                <button>Eliminar</button>
+            </div>
+        )}
+    </>
+    );
+}
