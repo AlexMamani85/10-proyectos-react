@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import React, { useState } from 'react';
-
+import Todo from './todo'
 
 const Container = styled.div`
   padding: 32px;
@@ -76,9 +76,7 @@ function TodoApp() {
 
       <TodosContainer>
         {todos.map(item => (
-            <div key={item.id}>
-              {item.title}
-            </div>
+          <Todo key={item.key} item={item} />
 
         ))}
       </TodosContainer>
