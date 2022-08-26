@@ -10,22 +10,29 @@ const TodoStyled = styled.div`
     align-content: stretch;
     color: black;
     &:hover {
-    color: red;
+    color: darkblue;
+    border: gray solid 2px;
+    border-radius:6px;
     }
 `
 const Title = styled.span`
-
-    width: 320px;
+    width: 300px;
+    color: ${({completed}) => completed ? 'gray' : 'black'}
 `
 
 
-export default function Todo({item, onUpdateFromTodoApp, onDelete}) {
+export default function Todo({item, onUpdateFromTodoApp, onDelete, onComplete}) {
     const [isEdit,setIsEdit] = useState(false)
 
     function updateFunction(id, value){
         setIsEdit(false);
         onUpdateFromTodoApp(id, value)
     }
+
+    function handleComplete(id, value){
+        onComplete(id, value);
+    }
+
     function FormEdit({value}) {
         const [newValue, setNewValue] = useState(value)
 
@@ -49,15 +56,19 @@ export default function Todo({item, onUpdateFromTodoApp, onDelete}) {
     function TodoElement() {
         return (
             <TodoStyled>
-                <Title>
-                    {item.title}
+                <input checked={item.completed} onChange={(e)=>handleComplete(item.id,e.target.checked)} type="checkbox"></input>
+                <Title completed={item.completed}>
+                    {
+                        item.completed? (<strike>{item.title}</strike>) : (<p>{item.title}</p>)
+                    }
                 </Title>
                     <button onClick={()=>setIsEdit(true)}>Editar</button>
                     <button onClick={()=>onDelete(item.id)}>Eliminar</button>
-
             </TodoStyled>
         );
     }
+
+
     return (
     <div>
         {isEdit? (<FormEdit value={item.title}/>):(<TodoElement />)}

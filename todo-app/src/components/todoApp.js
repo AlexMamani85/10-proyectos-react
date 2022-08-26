@@ -65,7 +65,7 @@ function TodoApp() {
     const newTodo = {
       id: crypto.randomUUID(),
       title: title,
-      completed: false.valueOf,
+      completed: false,
     }
     setTodos([...todos, newTodo]);
 
@@ -75,12 +75,14 @@ function TodoApp() {
     const temp = [...todos];
     const item = temp.find(item => item.id === id);
     item.title = value
-    console.log(id);
-    console.log(value);
     setTodos(temp);
     
-
-
+  }
+  function handleComplete(id, value) {
+    const temp = [...todos];
+    const item = temp.find(item => item.id === id);
+    item.completed = !item.completed 
+    setTodos(temp);
   }
 
   function handleDelete(id) {
@@ -100,7 +102,10 @@ function TodoApp() {
 
       <TodosContainer>
         {todos.map(item => (
-          <Todo onUpdateFromTodoApp={handleUpdate} onDelete={(e)=>handleDelete(item.id)} item={item} />
+          <Todo onUpdateFromTodoApp={handleUpdate} 
+                onDelete={(e)=>handleDelete(item.id)} 
+                onComplete={handleComplete}
+                item={item} />
 
         ))}
       </TodosContainer>
