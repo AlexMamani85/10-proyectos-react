@@ -1,21 +1,17 @@
 import React, { useState } from 'react';
 
-export default function Todo({item}) {
+export default function Todo({item, onUpdateFromTodoApp, onDelete}) {
     const [isEdit,setIsEdit] = useState(false)
 
-
-    function updateFunction(e){
-        e.preventDefault();
+    function updateFunction(id, value){
         setIsEdit(false);
-        console.log(isEdit);
+        onUpdateFromTodoApp(id, value)
     }
     function FormEdit({value}) {
-
         const [newValue, setNewValue] = useState(value)
 
         function handleSubmit(e) {
             e.preventDefault();
-
         }
         
         function handleChange(e) {
@@ -26,7 +22,7 @@ export default function Todo({item}) {
         return (
             <form onSubmit={handleSubmit}>
                 <input  type='text' onChange={handleChange} value={newValue}/>
-                <button onClick={updateFunction}>Update</button>
+                <button onClick={()=>updateFunction(item.id,newValue)}>Update</button>
             </form>
         );
     }
@@ -36,7 +32,7 @@ export default function Todo({item}) {
             <div>
                 {item.title}
                 <button onClick={()=>setIsEdit(true)}>Editar</button>
-                <button>Eliminar</button>
+                <button onClick={()=>onDelete(item.id)}>Eliminar</button>
             </div>
         );
     }

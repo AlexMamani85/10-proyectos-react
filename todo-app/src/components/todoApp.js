@@ -59,9 +59,24 @@ function TodoApp() {
     }
     setTodos([...todos, newTodo]);
 
+    setTitle('')
+  }
+  function handleUpdate(id, value) {
+    const temp = [...todos];
+    const item = temp.find(item => item.id === id);
+    item.title = value
+    console.log(id);
+    console.log(value);
+    setTodos(temp);
+    
+
 
   }
 
+  function handleDelete(id) {
+    const temp = todos.filter( item => item.id !== id );
+    setTodos(temp);
+  }
 
     return ( <Container>
       <Form>
@@ -76,7 +91,7 @@ function TodoApp() {
 
       <TodosContainer>
         {todos.map(item => (
-          <Todo key={item.key} item={item} />
+          <Todo onUpdateFromTodoApp={handleUpdate} onDelete={(e)=>handleDelete(item.id)} item={item} />
 
         ))}
       </TodosContainer>
