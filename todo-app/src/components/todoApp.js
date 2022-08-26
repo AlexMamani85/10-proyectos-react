@@ -3,41 +3,51 @@ import React, { useState } from 'react';
 import Todo from './todo'
 
 const Container = styled.div`
-  padding: 32px;
-  background-color: red;
-  text-align: center;
-  font-size: 24px;
-  border-radius: 4px;
-  color: black;
-  font-weight: bold;
-  width: 50%;
+  width: 500px;
+  margin: 100px auto;
+  display: flex;
+  flex-direction: column;
   &:hover {
-    color: white;
+    background-color: gray;
   }
 `
 
 const TodosContainer = styled.div`
   padding: 32px;
-  background-color: green;
+  background-color: lightblue;
   text-align: center;
-  font-size: 24px;
+  font-size: 16px;
   border-radius: 4px;
-  color: black;
+  color: gray;
   font-weight: bold;
   width: 90%;
   &:hover {
-    color: white;
+    color: black;
   }
 `
 
 const Form = styled.form`
-
+  display: flex;
+  gap: 5px;
 `
 
 const Input = styled.input`
+
 type: ${({ type }) => type};
 value: ${({value}) => value};
 `
+
+const InputText = styled.input`
+  flex-grow: 1;
+  width: 100%;
+  padding: 10px;
+  border-radius: 3px;
+  border: solid 1px #999;
+  type: ${({ type }) => type};
+  value: ${({value}) => value};
+`
+
+
 
 function TodoApp() {
 
@@ -80,13 +90,12 @@ function TodoApp() {
 
     return ( <Container>
       <Form>
-        <Input onChange={handleChange} 
+        <InputText onChange={handleChange} 
             value={title} />
         <Input 
           onClick={handleSubmit} 
           type="submit" 
           value="Create toDO"/>
-        {title}
       </Form>
 
       <TodosContainer>
